@@ -25,14 +25,14 @@ action_potentials = np.load("./data_files/action_potentials.npy", allow_pickle=T
 firing_samples = np.load("./data_files/firing_samples.npy", allow_pickle=True)[0]
 
 # Signal which is 1 when there is a sample
-impulses = np.array([[0]*samples]*8)
+impulses = np.array([[0]*samples]*8, dtype='float')
 
 for n in range(8):
     for index in firing_samples[n]:
         impulses[n][index] = 1
 
 # Actual action trains
-action_trains = np.array([[0]*samples_convolved]*8)
+action_trains = np.array([[0]*samples_convolved]*8, dtype='float')
 
 # 1a)
 
@@ -73,7 +73,7 @@ plt.show()
 
 # 1e)
 
-emg_signal = np.array([0]*samples_convolved)
+emg_signal = np.array([0]*samples_convolved, dtype='float')
 for n in range(8):
     emg_signal += action_trains[n]
 
@@ -95,7 +95,7 @@ hanning_convolved_samples = samples + hanning_samples - 1
 
 xvalues_hanning_convolved=[(t/samples)*(n-(hanning_samples//2)) for n in range(hanning_convolved_samples)]
 
-filtered_impulses = np.array([[0]*hanning_convolved_samples]*8)
+filtered_impulses = np.array([[0]*hanning_convolved_samples]*8, dtype='float')
 
 for n in range(8):
     filtered_impulses[n] = ss.fftconvolve(impulses[n], hanning, mode='full')
