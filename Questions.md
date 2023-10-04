@@ -16,5 +16,12 @@ When calculating the time of the original samples we said that sample n occurs a
 
 ## Problem 2
 
-Started, but not sure about theory of hanning filters: TODO understand this
+### d)
 
+Unit 7 fires faster, we can see that the amplitude of the graph for unit 7 has an amplitude around 7.5, while unit 4 has an amplitude hovering around 5. The amplitude being higher implies a higher frequency, as the impulses being tightly together means more windows in the convolution will "overlap" and add up at that point.
+
+## Problem 3
+
+### b)
+
+There is a huge peak in the signal with interference at f=50Hz, which is to be expected since we added a pure 50Hz sine wave as interference. :P
