@@ -14,11 +14,12 @@ xvalues = [n*(t/samples) for n in range(samples)]
 
 surface_emg = np.load("./data_files/f.npy", allow_pickle=True)[0]
 
-# sinus is very pretty :D <3
+# a clear sinus wave, used for interference
 interference = np.array([0.2*m.sin(2*m.pi*interference_frequency*t) for t in xvalues], dtype='float')
 
 result_emg = np.add(surface_emg, interference)
 
+# switching to frequency domain, keeping half
 surface_emg_freq_domain = sf.fft(surface_emg)
 surface_emg_freq_domain = np.abs(surface_emg_freq_domain[:len(surface_emg_freq_domain)//2])
 result_emg_freq_domain = sf.fft(result_emg)

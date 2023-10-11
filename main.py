@@ -23,22 +23,22 @@ xvalues=[(t/samples)*n for n in range(samples)]
 xvalues_convolved=[(t/samples)*(n-(99//2)) for n in range(samples_convolved)]
 
 action_potentials = np.load("./data_files/action_potentials.npy", allow_pickle=True)
-# Not sure why [0] is needed, but this works
+# [0] is needed because the samples are formatted as a 2d array but it is actually just a list
 firing_samples = np.load("./data_files/firing_samples.npy", allow_pickle=True)[0]
 
-# Signal which is 1 when there is a sample
+# signal which is 1 when there is a sample
 impulses = np.array([[0]*samples]*8, dtype='float')
 
 for n in range(8):
     for index in firing_samples[n]:
         impulses[n][index] = 1
 
-# Actual action trains
+# actual action trains
 action_trains = np.array([[0]*samples_convolved]*8, dtype='float')
 
 # 1a)
 
-# Calculated through convolution
+# calculated through convolution
 #   impulses is a sum of impulses at each instance where there is a action potential
 #   so we can use the convolution which will "paste" the action potential at each impulse
 for n in range(8):
@@ -75,6 +75,7 @@ plt.show()
 
 # 1e)
 
+# summing up action traings into EMG signal
 emg_signal = np.array([0]*samples_convolved, dtype='float')
 for n in range(8):
     emg_signal += action_trains[n]
